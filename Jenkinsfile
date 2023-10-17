@@ -13,11 +13,11 @@ podTemplate(containers: [
         
             stage ("1. Pulling Repository to Jenkins Workspace + Vulnerability Scanning") {
                 git branch: 'main', credentialsId: 'jenkins-mkhere22-connect', url: 'https://github.com/mk-territory/jenkins.git'
-                        stage ("1.1: Trivy Local Repo Scanning for Vulnerability")
-                            container('trivy') {
-                                sh 'trivy filesystem . --no-progress --ignore-unfixed --exit-code 0 --severity HIGH,CRITICAL'
-                                sh 'trivy plugin install github.com/aquasecurity/trivy-plugin-kubectl'
-                        }
+                stage ("1.1: Trivy Local Repo Scanning for Vulnerability")
+                    container('trivy') {
+                        sh 'trivy filesystem . --no-progress --ignore-unfixed --exit-code 0 --severity HIGH,CRITICAL'
+                        sh 'trivy plugin install github.com/aquasecurity/trivy-plugin-kubectl'
+                    }
                 }  
             
             stage('2. Sonarqube Code Analysis') {
