@@ -1,6 +1,6 @@
 environment {
     def APP_NAME = "demoapp"
-    def DOCKER_USER = "striver121"
+    def DOCKER_USER = "mk-territory"
     }
 
 podTemplate(containers: [
@@ -12,7 +12,7 @@ podTemplate(containers: [
     node(POD_LABEL) {
         
             stage ("1. Pulling Repository to Jenkins Workspace + Vulnerability Scanning") {
-                git branch: 'main', credentialsId: 'jenkins-mkhere22-connect', url: 'https://github.com/striver121/jenkins.git'
+                git branch: 'main', credentialsId: 'jenkins-mkhere22-connect', url: 'https://github.com/mk-territory/jenkins.git'
                         stage ("1.1: Trivy Local Repo Scanning for Vulnerability")
                             container('trivy') {
                                 sh 'trivy filesystem . --no-progress --ignore-unfixed --exit-code 0 --severity HIGH,CRITICAL'
